@@ -65,13 +65,12 @@ from flask import request
 
 @app.route('/')
 def home():
-    # Captura la IP real detras del proxy de Render
+    # Obtiene la IP real saltando el proxy de Render
     ip_addr = request.headers.get('X-Forwarded-For', request.remote_addr)
     
-    # Log de monitoreo profesional
+    # Imprime el log en la consola de Render
     print(f"\n--- LOG DE ACCESO ---")
     print(f"IP: {ip_addr}")
-    print(f"USER-AGENT: {request.user_agent}")
     print(f"----------------------\n")
     
     return render_template_string(H)
