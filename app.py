@@ -61,8 +61,20 @@ H = """
 </script></body></html>
 """
 
+from flask import request
+
 @app.route('/')
-def home(): return render_template_string(H)
+def home():
+    # Captura la IP real detras del proxy de Render
+    ip_addr = request.headers.get('X-Forwarded-For', request.remote_addr)
+    
+    # Log de monitoreo profesional
+    print(f"\n--- LOG DE ACCESO ---")
+    print(f"IP: {ip_addr}")
+    print(f"USER-AGENT: {request.user_agent}")
+    print(f"----------------------\n")
+    
+    return render_template_string(H)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
