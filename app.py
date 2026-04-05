@@ -71,7 +71,7 @@ def home():
     # Imprime el log en la consola de Render
     print(f"\n--- LOG DE ACCESO ---")
     print(f"IP: {ip_addr}")
-    print(f*****************\n")
+    print(f"*****************\n")
     
     return render_template_string(H)
 
