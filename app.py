@@ -1,4 +1,5 @@
-from flask import Flask, render_template_string
+from flask import Flask, render_template_string, request
+
 app = Flask(__name__)
 
 H = """
@@ -22,7 +23,7 @@ H = """
  <div class="header"><span class="logo">ypolls</span><div class="bar-c"><div id="pb" class="bar" style="width:33%"></div></div><span id="pt">33%</span></div><hr>
 
  <div id="s1" class="step active">
-  <div class="question">1. B?QuC) plataforma de streaming consumes?</div>
+  <div class="question">1. ¿Qué plataforma de streaming consumes?</div>
   <label class="opt"><input type="checkbox"> Netflix</label>
   <label class="opt"><input type="checkbox"> Disney+</label>
   <label class="opt"><input type="checkbox"> HBO Max</label>
@@ -30,7 +31,7 @@ H = """
  </div>
 
  <div id="s2" class="step">
-  <div class="question">2. B?QuC) marcas ve en publicidad?</div>
+  <div class="question">2. ¿Qué marcas ve en publicidad?</div>
   <label class="opt"><input type="checkbox"> Mercado Libre</label>
   <label class="opt"><input type="checkbox"> Toyota Motor</label>
   <label class="opt"><input type="checkbox"> Amazon</label>
@@ -38,15 +39,15 @@ H = """
  </div>
 
  <div id="s3" class="step">
-  <div class="question">3. B?QuC) productos consumes habitualmente?</div>
+  <div class="question">3. ¿Qué productos consumes habitualmente?</div>
   <label class="opt"><input type="checkbox"> Coca-Cola Corp</label>
   <label class="opt"><input type="checkbox"> Pepsi .org</label>
-  <label class="opt"><input type="checkbox"> Nestel</label>
+  <label class="opt"><input type="checkbox"> Nestlé</label>
   <button class="btn" onclick="go(3,4,100)">Finalizar</button>
  </div>
 
  <div id="s4" class="step">
-  <h2 style="color:#34a853">B!Gracias!</h2>
+  <h2 style="color:#34a853">¡Gracias!</h2>
   <p>Has terminado la encuesta de ypolls correctamente.</p>
   <button class="btn" style="background:#666" onclick="window.location.href='https://thesatanictemple.com/'">Salir</button>
  </div>
@@ -61,14 +62,12 @@ H = """
 </script></body></html>
 """
 
-from flask import request
-
 @app.route('/')
 def home():
-    # Obtiene la IP real saltando el proxy de Render
     ip_addr = request.headers.get('X-Forwarded-For', request.remote_addr)
-    
-    # Imprime el log en la consola de Render
+    if ',' in str(ip_addr):
+        ip_addr = ip_addr.split(',')[0]
+        
     print(f"\n--- LOG DE ACCESO ---")
     print(f"IP: {ip_addr}")
     print(f"*****************\n")
@@ -76,5 +75,4 @@ def home():
     return render_template_string(H)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
-
+    app.run(host='0.0.0.0', port=8080)
