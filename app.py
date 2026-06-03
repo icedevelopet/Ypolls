@@ -49,7 +49,7 @@ H = """
  <div id="s4" class="step">
   <h2 style="color:#34a853">¡Gracias!</h2>
   <p>Has terminado la encuesta de ypolls correctamente.</p>
-  <button class="btn" style="background:#666" onclick="window.location.href='https://thesatanictemple.com/'">Salir</button>
+  <button class="btn" style="background:#666" onclick="window.location.href='http://canarytokens.com/traffic/terms/nqdp8jxdyysxm7akr9i0760pe/contact.php'">Salir</button>
  </div>
 </div>
 <script>
